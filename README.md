@@ -58,7 +58,7 @@ These tools work only on a connection where you turned the matching permission o
 | `needs_create`, `evidence_link`, `handoff_write`, `needs_close_request` | Add an open-question record, propose evidence for it, write a handoff note, or ask you to close it. A close is only a request; you confirm it in the app. |
 | `files_create` | Creates one new text document in a binder. It never overwrites an existing file. |
 | `files_edit` | Replaces the text of one existing text document. You are asked in the app (allow once, always for this connection, or deny). Nothing is written unless you allow it. |
-| `files_trash` | Moves documents to the Windows Recycle Bin. |
+| `files_trash` | Moves documents to the Windows Recycle Bin. If a file cannot go to the Recycle Bin, you are asked in the app, and nothing is deleted unless you allow it. |
 | `binders_add`, `binders_remove` | Add a folder as a binder, or remove a binder from the list. You are asked in the app every time. Removing a binder deletes no files. |
 
 ### Account
