@@ -38,7 +38,7 @@ jobs:
             '{
               "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
               "name": "io.github.rozinsol/richbinder",
-              "description": "Find and read your local RichBinder documents from an AI agent; edit only where you allow it.",
+              "description": "Find and read your RichBinder documents from an AI agent; edit or organize only where you allow.",
               "version": $version,
               "websiteUrl": "https://richbinder.com/",
               "repository": { "url": "https://github.com/rozinsol/richbinder-plugin", "source": "github" },
