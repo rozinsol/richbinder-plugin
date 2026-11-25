@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "richbinder": {
+      "command": "rbctl.exe",
+      "args": ["mcp"]
+    }
+  }
+}
