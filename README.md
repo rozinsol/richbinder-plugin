@@ -28,7 +28,7 @@ The plugin itself contains configuration and documentation only. It has no execu
 
 ## What it runs
 
-`rbctl.exe` is installed by the RichBinder app from the Microsoft Store. It is not part of this repository and is not downloaded by this plugin. `rbctl.exe mcp` speaks MCP over standard input and output and passes each call to the RichBinder app running on the same PC. The app decides what is allowed: which binders this connection may read, and whether it may change anything.
+`rbctl.exe` is installed by the RichBinder app from the Microsoft Store. It is not part of this repository and is not downloaded by this plugin. `rbctl.exe mcp` speaks MCP over standard input and output and passes each call to the RichBinder app running on the same PC. The app decides what is allowed: which binders this connection may read, and whether it may change anything. The optional extension file in Releases (see "Install as a Claude Desktop extension") bundles its own copy of this program.
 
 ## What Claude can do
 
