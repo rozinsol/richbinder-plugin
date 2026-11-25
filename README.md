@@ -8,9 +8,19 @@ Install RichBinder from the Microsoft Store on Windows 10 or 11, and keep the ap
 
 The plugin needs the RichBinder AI edition, or RichBinder during its 30-day trial. Starting the trial takes a second confirmation: Claude shows you the trial terms, and the trial starts only after you confirm. Approving the connection itself is done in the RichBinder app (Settings, the gear button at the top right, › AI apps), not in Claude. RichBinder must run as the same Windows user as the AI agent, and you must have chosen at least one binder when you approved that AI agent (with no binder chosen, Claude cannot read anything).
 
+## Install as a Claude Desktop extension (.mcpb)
+
+As an alternative to the plugin, you can install the same connection as a Claude Desktop extension. Download `richbinder-1.1.4.mcpb` from the [Releases](https://github.com/rozinsol/richbinder-plugin/releases) page, then open Claude Desktop, go to Settings > Extensions and drag the file onto that page. Double-clicking the file does not open the install window.
+
+The extension is not signed, so Claude Desktop shows a warning that it is not verified by Anthropic. Install it only if you trust this repository.
+
+The extension contains the same `rbctl.exe` program that ships with RichBinder 1.1.4, and it needs the same things as the plugin (see "Before you install"): RichBinder from the Microsoft Store running on Windows 10 or 11, the AI edition or the 30-day trial, and at least one binder chosen when you approve the AI agent in the RichBinder app. You can read, and only where you allow it edit or organize, the documents in the binders you approve there.
+
+The extension file also contains the RichBinder program (governed by its Terms of Service) and third-party components under their own licenses; the notices are included in the file (`THIRD-PARTY-NOTICES.txt` and the `licenses` folder).
+
 ## What is in this repository
 
-This plugin contains configuration and documentation only. It has no executable code of its own.
+The plugin itself contains configuration and documentation only. It has no executable code of its own (the optional extension file in Releases also contains the RichBinder program).
 
 - `.claude-plugin/plugin.json` describes the plugin.
 - `.mcp.json` tells Claude to start one program: `rbctl.exe mcp`.
