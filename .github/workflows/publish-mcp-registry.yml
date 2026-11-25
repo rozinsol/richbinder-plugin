@@ -1,0 +1,63 @@
+name: Publish to the MCP Registry
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release version to publish (for example 1.1.4)"
+        required: true
+        default: "1.1.4"
+      tag:
+        description: "Release tag that holds the .mcpb file"
+        required: true
+        default: "v1.1.4-mcpb"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download the release file and compute its checksum
+        id: asset
+        run: |
+          set -euo pipefail
+          url="https://github.com/${GITHUB_REPOSITORY}/releases/download/${{ inputs.tag }}/richbinder-${{ inputs.version }}.mcpb"
+          curl -fsSL -o richbinder.mcpb "$url"
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "sha=$(sha256sum richbinder.mcpb | cut -d' ' -f1)" >> "$GITHUB_OUTPUT"
+
+      - name: Write server.json
+        run: |
+          jq -n \
+            --arg version "${{ inputs.version }}" \
+            --arg url "${{ steps.asset.outputs.url }}" \
+            --arg sha "${{ steps.asset.outputs.sha }}" \
+            '{
+              "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+              "name": "io.github.rozinsol/richbinder",
+              "description": "Find and read your local RichBinder documents from an AI agent; edit only where you allow it.",
+              "version": $version,
+              "websiteUrl": "https://richbinder.com/",
+              "repository": { "url": "https://github.com/rozinsol/richbinder-plugin", "source": "github" },
+              "packages": [
+                {
+                  "registryType": "mcpb",
+                  "identifier": $url,
+                  "fileSha256": $sha,
+                  "transport": { "type": "stdio" }
+                }
+              ]
+            }' > server.json
+
+      - name: Install mcp-publisher
+        run: |
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" | tar xz mcp-publisher
+
+      - name: Log in with the repository identity
+        run: ./mcp-publisher login github-oidc
+
+      - name: Publish
+        run: ./mcp-publisher publish
